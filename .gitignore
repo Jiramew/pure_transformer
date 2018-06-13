@@ -1,0 +1,8 @@
+.idea/
+*.pyc
+*.log
+.pypirc
+test/
+dist/
+corpora/
+preprocessed/

@@ -1,4 +1,3 @@
-import tensorflow as tf
 import numpy as np
 import codecs
 import regex
@@ -70,28 +69,3 @@ def load_test_data(min_cnt, maxlen):
 
     X, Y, Sources, Targets = create_data(min_cnt, maxlen, de_sents, en_sents)
     return X, Sources, Targets  # (1064, 150)
-
-
-def get_batch_data(min_cnt, maxlen, batch_size):
-    # Load data
-    X, Y = load_train_data(min_cnt, maxlen)
-
-    # calc total batch count
-    num_batch = len(X) // batch_size
-
-    # Convert to tensor
-    X = tf.convert_to_tensor(X, tf.int32)
-    Y = tf.convert_to_tensor(Y, tf.int32)
-
-    # Create Queues
-    input_queues = tf.train.slice_input_producer([X, Y])
-
-    # create batch queues
-    x, y = tf.train.shuffle_batch(input_queues,
-                                  num_threads=8,
-                                  batch_size=batch_size,
-                                  capacity=batch_size * 64,
-                                  min_after_dequeue=batch_size * 32,
-                                  allow_smaller_final_batch=False)
-
-    return x, y, num_batch  # (N, T), (N, T), ()

@@ -1,2 +1,2 @@
 # pure_transformer
-Pure implementation of Transformer without any machine learning framework
+Pure implementation of Google's Paper "Attention is all you need" without any machine learning framework.
